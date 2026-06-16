@@ -195,10 +195,9 @@ app.post('/api/diagnostics/run-command', authenticateToken, (req, res) => {
     return res.status(400).json({ error: 'Command is required.' });
   }
 
-  // Sanitize command: must run vitest run commands or help/clear (which shouldn't reach here)
-  const allowedPrefix = 'npx vitest run';
-  if (!command.startsWith(allowedPrefix)) {
-    return res.status(400).json({ error: 'Command not authorized. Only "npx vitest run" commands are supported.' });
+  // Sanitize command: must run vitest run commands or manual test scripts
+  if (!command.startsWith('npx vitest run') && !command.startsWith('node tests/manual/')) {
+    return res.status(400).json({ error: 'Command not authorized. Only "npx vitest run" or "node tests/manual/" commands are supported.' });
   }
 
   const frontendPath = path.resolve(__dirname, '../frontend');

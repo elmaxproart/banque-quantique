@@ -193,6 +193,8 @@ export default function App() {
     'npx vitest run tests/integration/interbank.test.js',
     'npx vitest run tests/integration/e2e.test.js',
     'npx vitest run --coverage',
+    'node tests/manual/loadTest.js',
+    'node tests/manual/healthAudit.js',
     'help',
     'clear'
   ];
@@ -1213,7 +1215,7 @@ export default function App() {
     }
 
     // Call child_process via server gateway or run offline sandbox simulation
-    if (trimmed.startsWith('npx vitest run')) {
+    if (trimmed.startsWith('npx vitest run') || trimmed.startsWith('node tests/manual/')) {
       setTerminalLoading(true);
       
       // If we are in simulation mode or offline
@@ -1222,7 +1224,54 @@ export default function App() {
         setTimeout(() => {
           let stdoutContent = '';
           
-          if (trimmed.includes('auth.test.js')) {
+          if (trimmed.includes('loadTest.js')) {
+            stdoutContent = `
+====================================================
+QUANTUM CORE BANKING SYSTEM - MANUAL LOAD TESTING
+Simulating "hey" benchmark utility
+Target: http://localhost:10000/health
+Total Requests: 100 | Concurrency: 10
+====================================================
+
+Rapport d'analyse de performance (Load Test) :
+-----------------------------------------------
+Durée totale de l'analyse : 0.812 secondes
+Requêtes réussies         : 100
+Requêtes échouées         : 0
+Débit (Throughput)        : 123.15 req/sec
+
+Statistiques de latence :
+  Moyenne  : 41.5 ms
+  Min      : 12 ms
+  Max      : 115 ms
+-----------------------------------------------
+`;
+          } else if (trimmed.includes('healthAudit.js')) {
+            stdoutContent = `
+====================================================
+QUANTUM CORE BANKING SYSTEM - INTEGRITY AUDIT
+Checking microservice lanes and status...
+====================================================
+
+[+] Gateway Node (Public) -> ONLINE
+    Statut  : 200 OK
+    Latence : 8 ms
+    Réponse : {"gateway":"ONLINE","auth_service":"http://localhost:10001","transaction_service":"http://localhost:10002"}
+-----------------------------------------------
+[+] Authentication API -> ONLINE
+    Statut  : 200 OK
+    Latence : 12 ms
+    Réponse : {"service":"auth-service","status":"ONLINE"}
+-----------------------------------------------
+[+] Transactions API -> ONLINE
+    Statut  : 200 OK
+    Latence : 15 ms
+    Réponse : {"service":"transaction-service","status":"ONLINE"}
+-----------------------------------------------
+
+Audit d'intégrité système complété.
+`;
+          } else if (trimmed.includes('auth.test.js')) {
             stdoutContent = `
  RUN  v4.1.9 C:/Users/PC/OneDrive/Documents/304/frontend
 
