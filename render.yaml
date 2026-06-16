@@ -2,6 +2,7 @@ services:
   # 1. Auth Microservice (Private)
   - type: web
     name: quantum-auth-service
+    plan: free
     env: node
     rootDir: services/auth
     buildCommand: npm install
@@ -15,6 +16,7 @@ services:
   # 2. Transaction Microservice (Private)
   - type: web
     name: quantum-transaction-service
+    plan: free
     env: node
     rootDir: services/transactions
     buildCommand: npm install
@@ -26,6 +28,7 @@ services:
   # 3. API Gateway (Public entrance)
   - type: web
     name: quantum-gateway
+    plan: free
     env: node
     rootDir: gateway
     buildCommand: npm install
