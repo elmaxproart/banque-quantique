@@ -1,0 +1,16 @@
+{
+  "name": "quantum-auth-service",
+  "version": "1.0.0",
+  "description": "Authentication microservice for quantum banking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0"
+  }
+}

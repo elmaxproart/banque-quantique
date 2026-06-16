@@ -1,0 +1,14 @@
+{
+  "name": "quantum-banking-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo containing futuristic microservices bank with React UI & Node.js API",
+  "scripts": {
+    "install-all": "npm install --prefix gateway && npm install --prefix services/auth && npm install --prefix services/transactions && npm install --prefix frontend",
+    "start-gateway": "npm run dev --prefix gateway",
+    "start-auth": "npm run dev --prefix services/auth",
+    "start-transactions": "npm run dev --prefix services/transactions",
+    "start-frontend": "npm run dev --prefix frontend",
+    "dev-backend": "start npm run start-auth && start npm run start-transactions && start npm run start-gateway",
+    "dev": "start npm run start-auth && start npm run start-transactions && start npm run start-gateway && start npm run start-frontend"
+  }
+}

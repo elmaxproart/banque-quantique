@@ -1,0 +1,30 @@
+{
+  "accounts": {
+    "f13f313e-7d3d-446f-89aa-1cb7866c75bc": {
+      "userId": "f13f313e-7d3d-446f-89aa-1cb7866c75bc",
+      "username": "23U2514",
+      "balances": {
+        "USD": 49000,
+        "EUR": 12500,
+        "QTC": 500,
+        "SOL": 25.5
+      },
+      "accountNumber": "Q-BANK-69743094"
+    }
+  },
+  "transactions": [
+    {
+      "id": "bbf50729-0efd-465d-9be8-65c3e528d141",
+      "senderId": "f13f313e-7d3d-446f-89aa-1cb7866c75bc",
+      "senderUsername": "23U2514",
+      "senderAccountNumber": "Q-BANK-69743094",
+      "recipientId": "external-wallet-id",
+      "recipientUsername": "External Wallet / Smart Contract",
+      "recipientAccountNumber": "23u2514",
+      "amount": 1000,
+      "currency": "USD",
+      "description": "yo",
+      "timestamp": "2026-06-16T22:31:11.589Z"
+    }
+  ]
+}

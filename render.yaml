@@ -1,0 +1,51 @@
+services:
+  # 1. Auth Microservice (Private)
+  - type: web
+    name: quantum-auth-service
+    env: node
+    rootDir: services/auth
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10001
+      - key: JWT_SECRET
+        value: quantum-core-secret-key-1099
+
+  # 2. Transaction Microservice (Private)
+  - type: web
+    name: quantum-transaction-service
+    env: node
+    rootDir: services/transactions
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10002
+
+  # 3. API Gateway (Public entrance)
+  - type: web
+    name: quantum-gateway
+    env: node
+    rootDir: gateway
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: AUTH_SERVICE_URL
+        value: http://quantum-auth-service:10001
+      - key: TRANSACTION_SERVICE_URL
+        value: http://quantum-transaction-service:10002
+
+  # 4. React Frontend Dashboard (Static Site)
+  - type: web
+    name: quantum-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: max-age=31536000
