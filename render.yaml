@@ -39,9 +39,8 @@ services:
         value: http://quantum-transaction-service:10002
 
   # 4. React Frontend Dashboard (Static Site)
-  - type: web
+  - type: static
     name: quantum-frontend
-    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     publishPath: dist
