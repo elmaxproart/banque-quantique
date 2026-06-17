@@ -121,6 +121,7 @@ export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('qb_user')) || null);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [activeTab, setActiveTab] = useState('wallet');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Dashboard Info
   const [accountInfo, setAccountInfo] = useState(null);
@@ -1421,15 +1422,7 @@ Audit d'intégrité système complété.
       {/* 1. LOGIN SCREEN */}
       {!token ? (
         <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
-          <div className="cyber-panel cyber-corners" style={{
-            width: '100%',
-            maxWidth: '1000px',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            borderWidth: '1px',
-            animation: 'neon-pulse-cyan 5s infinite',
-            overflow: 'hidden'
-          }}>
+          <div className="login-grid cyber-panel cyber-corners">
             {/* Left side Form */}
             <div style={{ padding: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRight: '1px solid var(--border-color)' }}>
               
